@@ -94,7 +94,6 @@
                     <div class="container mt-5">
                         <h1 class="mb-4">Tambah Customer</h1>
 
-                        <!-- Form Tambah Customer -->
                         <form action="{{ route('transactions.store') }}" method="POST">
                             @csrf
                             <div class="mb-3">
