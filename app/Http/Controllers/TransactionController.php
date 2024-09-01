@@ -19,5 +19,14 @@ class TransactionController extends Controller
 
     return response()->json(['message' => 'Transaction successful', 'transaction' => $transaction]);
 }
+ // Method untuk menampilkan daftar transaksi
+public function index()
+{
+    // Mengambil semua transaksi beserta customer dan kendaraan
+    $transactions = Transaction::with(['customer', 'vehicle'])->get();
+
+    // Mengirim data transaksi ke view
+    return view('transactions.index', compact('transactions'));
+}
 
 }
