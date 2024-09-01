@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('phone')->unique();
+            $table->string('phone')->unique()->change();
+            $table->integer('total_washes')->default(0);
             $table->timestamps();
         });
     }

@@ -7,20 +7,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Transaction extends Model
 {
+    use HasFactory;
+
     protected $fillable = ['customer_id', 'vehicle_id', 'price'];
 
-    public static function boot()
+    public function customer()
     {
-        parent::boot();
+        return $this->belongsTo(Customer::class);
+    }
 
-        static::creating(function ($transaction) {
-            $transactionCount = Transaction::where('customer_id', $transaction->customer_id)->count();
-
-            if (($transactionCount + 1) % 5 == 0) {
-                $transaction->price = 0; // Gratis cuci untuk transaksi ke-5
-            } else {
-                $transaction->price = Vehicle::find($transaction->vehicle_id)->price;
-            }
-        });
+    public function vehicle()
+    {
+        return $this->belongsTo(Vehicle::class);
     }
 }
